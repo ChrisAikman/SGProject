@@ -46,4 +46,14 @@ describe('App', function () {
     /* Make sure that details of the comments are correct. */
     recursiveCommentCheck(dataset.discussion.comments);
   });
+
+  it("displays the discussion title", function () {
+      /* Make sure that the page title was set. */
+      expect(document.title).toEqual(updateddb.discussion.title);
+
+      /* Make sure that the header was set. */
+      var h1 = ReactTestUtils.findRenderedDOMComponentWithTag(app, 'h1');
+      expect(h1).toExist();
+      expect(h1.textContent).toEqual(updateddb.discussion.title);
+  });
 });
