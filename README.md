@@ -4,9 +4,16 @@ Deployed build [here](http://www.chrisaikman.com).
 
 ## Table of Contents
 
+- [Setup, Running, and Testing](#setup-running-and-testing)
 - [Project Requirements](#project-requirements)
-- [Assumptions](#updating-to-new-releases)
+- [Assumptions](#assumptions)
   - [Assumption1](#assumption1)
+
+## Setup, Running and Testing
+Install all required modules with: `npm install --save-dev`.
+Run dev build with: `npm start`.
+Compile production build with: `npm run build`.
+Run the tests with `./node_modules/karma/bin/karma start ./config/karma.config.js`.
 
 ## Project Requirements
 - [ ] Implement the code and markup to display the thread on a web page.
@@ -21,5 +28,17 @@ Deployed build [here](http://www.chrisaikman.com).
   - [ ] Is there a sense of delight or joy when using it?
 - [ ] JavaScript automated testing.
 
+## Project Timeline
+
 ## Assumptions
 ### Assumption1
+
+## Requirements Overview
+
+## Data Format
+
+## Design
+
+## Future Improvements
+
+## What I've Learned
