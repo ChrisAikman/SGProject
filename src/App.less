@@ -1,1 +1,91 @@
+@fonts: 18px e('/') 1.5 'Open Sans', Arial, Helvetica, sans-serif;
+@spacing: 10px;
 
+@color-background: #8d9799;
+@color-comment: #eee;
+@color-primary: #6a9faa;
+@color-text: #222;
+
+.shadow(@spread, @blur, @color) {
+  -webkit-box-shadow: 0px 0px @spread @blur @color;
+     -moz-box-shadow: 0px 0px @spread @blur @color;
+      -ms-box-shadow: 0px 0px @spread @blur @color;
+          box-shadow: 0px 0px @spread @blur @color;
+}
+
+.transition(@trans) {
+  -webkit-transition: @trans;
+     -moz-transition: @trans;
+       -o-transition: @trans;
+          transition: @trans;
+}
+
+body {
+  background-color: @color-background;
+  padding: 20px;
+}
+
+.Thread {
+  max-width: 700px;
+  margin: auto;
+  color: @color-text;
+  background-color: @color-background * 0.75;
+  .shadow(20px, 10px, rgba(0,0,0,.25));
+
+  .Header {
+    text-align: center;
+    border: 1px solid black;
+    border-bottom: none;
+    margin-top: @spacing;
+    color: @color-primary;
+    background-color: @color-background * 0.25;
+  }
+
+  .Comment {
+    display: flex;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin-bottom: @spacing;
+    padding: @spacing;
+    background-color: @color-comment;
+
+    .transition(background-color 0.5s ease);
+
+    .Side {
+      float: left;
+      width: 64px;
+      padding-right: 20px;
+
+      img {
+        width: 64px;
+      }
+    }
+
+    .Content {
+      float: left;
+      flex-grow: 1;
+
+      .User {
+        color: @color-primary;
+        float: left;
+        font-weight: bold;
+      }
+
+      .Datetime {
+        float: right;
+        font-size: 80%;
+        line-height: 1.5/.8;
+        color: @color-text * 2.5;
+        font-style: italic;
+      }
+
+      .SubComments {
+        margin-top: @spacing;
+      }
+    }
+  }
+
+  .OuterComment {
+    border: 1px solid @color-comment * .6;
+  }
+}
