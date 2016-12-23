@@ -3,6 +3,7 @@ import { getCommentID } from './Helpers.js';
 import { updateDatabase } from './Helpers.js';
 import Comment from './Comment.js';
 import './App.less';
+import 'font-awesome-webpack';
 import threaddb from '../data/Data.json';
 
 class App extends Component {

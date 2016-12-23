@@ -5,6 +5,9 @@ import './_reset.less';
 import './index.less';
 
 ReactDOM.render(
-  <App />,
+  <App
+    author_id={4}
+    author={'Brady'}
+  />,
   document.getElementById('root')
 );
