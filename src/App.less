@@ -89,3 +89,19 @@ body {
     border: 1px solid @color-comment * .6;
   }
 }
+
+.Button {
+  float: right;
+  margin-left: @spacing;
+  border: 1px solid @color-comment * .6;
+  padding-left: @spacing/2;
+  padding-right: @spacing/2;
+  background-color: @color-comment * 1.2;
+  cursor: pointer;
+  cursor: hand;
+  .transition(background-color 0.5s ease);
+
+  &:hover {
+    background-color: @color-background;
+  }
+}
