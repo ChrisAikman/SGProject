@@ -56,4 +56,9 @@ describe('App', function () {
       expect(h1).toExist();
       expect(h1.textContent).toEqual(updateddb.discussion.title);
   });
+
+  it("displays all comments", function() {
+    var comments = ReactTestUtils.scryRenderedDOMComponentsWithClass(app, 'Comment');
+    expect(comments.length).toEqual(Object.keys(updateddb.comments).length);
+  });
 });
