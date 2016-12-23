@@ -1,4 +1,16 @@
-import ReactDOM from 'react-dom';
+/** Universal function for managing timestamps.
+ *  @param {string} timestamp - The timestamp in ISO 8601.
+ */
+export function getTimestamp(timestamp) {
+  var ts = new Date(timestamp);
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December"];
+
+  return monthNames[ts.getMonth()] + ' ' +
+         ts.getDate() + ', ' +
+         ts.getFullYear() + ' ' +
+         ts.toLocaleTimeString();
+}
 
 /** Universal function for getting a comment ID from a comment.
  *  @param {object} comment - The comment to get the ID of.
