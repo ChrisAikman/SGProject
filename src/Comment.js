@@ -23,6 +23,11 @@ class Comment extends Component {
             {getTimestamp(comment.datetime)}
           </div>
           <div className="clear"></div>
+
+          <div>{comment.comment}</div>
+          <div>
+            {this.props.subcomments}
+          </div>
         </div>
         <div className="clear"></div>
       </div>

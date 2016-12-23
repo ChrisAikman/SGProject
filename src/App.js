@@ -26,10 +26,35 @@ class App extends Component {
       <Comment
         key={getCommentID(comment)}
         comment={comment}
+        subcomments={subComments}
         nest_level={nest_level}
         curauthorid={this.props.author_id}
       />
     )
+  }
+
+  /** Helper function to recursively convert a list of comments into nodes.
+   *  @param {array} comments - An array of comments to convert to nodes.
+   *  @param {number} nest_level - The current nest level of the comment.
+   */
+  getComments(comments, nest_level) {
+    var builtComments = [];
+
+    /* Loop through all of the comments at this level. */
+    for (var c = 0, len = comments.length; c < len; c++) {
+      var comment = this.state.comments[comments[c]];
+      var subComments = [];
+      if ('comments' in comment && comment.comments.length > 0) {
+        /* Recursive call! */
+        subComments.push(this.getComments(comment.comments, nest_level + 1));
+      }
+
+      builtComments.push(this.getComment(comment, subComments, nest_level));
+    }
+
+    return (
+      builtComments
+    );
   }
 
   /** Render the component. */
@@ -41,6 +66,7 @@ class App extends Component {
           <h1>{this.state.discussion.title}</h1>
         </div>
         {this.getComment(this.state.comments[this.state.discussion.commentid], [], 1)}
+        {this.getComments(this.state.comments[this.state.discussion.commentid].comments, 1)}
       </div>
     );
   }
