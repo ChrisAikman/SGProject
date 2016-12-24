@@ -5,6 +5,17 @@ import profilepic from './user.svg';
 
 /** Component that contains a single comment. */
 class Comment extends Component {
+  /** Set up the initial comment state. */
+  constructor() {
+    super();
+    this.state = {
+      addonClass: '',
+      isEditing: false,
+      isDeleting: false,
+      isReplying: false,
+    };
+  }
+
   /** Helper function to get a toolbar for comment management. */
   getToolbar() {
     var mytoolbars = [];
@@ -75,12 +86,32 @@ class Comment extends Component {
     );
   }
 
+  /** Handles button commands for this comment.
+   *  @param {string} command - The command to execute.
+   */
+  handleClick(command) {
+  }
+
   /** Render the component. */
   render() {
     const comment = this.props.comment;
+    const classes = (this.props.nest_level === 1) ? 'Comment ' : 'Comment OuterComment ';
+
+    if ('deleted' in comment && comment.deleted) {
+      return (
+        <div className={classes}>
+          <div className="Content">
+            <div className="Deleted">
+              This comment has been deleted.
+            </div>
+            {this.getSubComments(this.props.subcomments)}
+          </div>
+        </div>
+      );
+    }
 
     return (
-      <div className={"Comment"}>
+      <div className={classes + this.state.addonClass}>
         <div className="Side">
           <img src={profilepic} alt={comment.author}/>
         </div>

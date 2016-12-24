@@ -27,9 +27,12 @@ class App extends Component {
       <Comment
         key={getCommentID(comment)}
         comment={comment}
-        subcomments={subComments}
         nest_level={nest_level}
+        subcomments={subComments}
         curauthorid={this.props.author_id}
+        onEdit={(comment, newcomment) => this.handleCommentEdit(comment, newcomment)}
+        onReply={(parentcomment, newcomment) => this.handleCommentReply(parentcomment, newcomment)}
+        onDelete={(comment) => this.handleCommentDelete(comment)}
       />
     )
   }
@@ -56,6 +59,26 @@ class App extends Component {
     return (
       builtComments
     );
+  }
+
+  /** Handles adding a new comment reply.
+   *  @param {object} parentcomment - The parent comment that is being replied to.
+   *  @param {string} newcomment - The comment text of the new comment.
+   */
+  handleCommentReply(parentcomment, newcomment) {
+  }
+
+  /** Handles editing a comment.
+   *  @param {object} comment - The comment that is being edited.
+   *  @param {string} newcomment - The comment text of the new comment.
+   */
+  handleCommentEdit(comment, newcomment) {
+  }
+
+  /** Handles deleting a comment.
+   *  @param {object} comment - The comment that is being deleted.
+   */
+  handleCommentDelete(comment) {
   }
 
   /** Render the component. */
