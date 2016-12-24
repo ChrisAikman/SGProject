@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CommentEditor from './CommentEditor.js';
 import CommentToolbutton from './CommentToolbutton.js';
 import { getTimestamp } from './Helpers.js';
 import profilepic from './user.svg';
@@ -61,7 +62,7 @@ class Comment extends Component {
    *  @param {string} subComments - The HTML of the subcomments.
    */
   getSubComments(subComments) {
-    if (subComments.length > 0) {
+    if (subComments.length > 0 || this.state.isReplying) {
       return (
         <div className="SubComments">
           {subComments}
@@ -72,24 +73,49 @@ class Comment extends Component {
     return null;
   }
 
-  /** Helper function to get the normal comment text, or the editor. */
+  //** Helper function to get the normal comment text, or the editor. */
   getCommentText() {
     const comment = this.props.comment;
     const commentText = comment.comment;
 
-    return (
-      <div className="CommentText">
-        <div
-          dangerouslySetInnerHTML={{__html: commentText}}
+    if (!this.state.isEditing) {
+      return (
+        <div className="CommentText ql-snow">
+          <div
+            className="ql-editor"
+            dangerouslySetInnerHTML={{__html: commentText}}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <CommentEditor
+          key={567423} // REPLACE THIS <----------------------------------------------------------------------
+          comment={commentText}
+          ref={(CommentEditor) => {this.commentEditor = CommentEditor}} // DO NEED??? <-----------------------
+          onClick={(command) => {this.handleClick(command)}}
         />
-      </div>
-    );
+      );
+    }
   }
 
   /** Handles button commands for this comment.
    *  @param {string} command - The command to execute.
    */
   handleClick(command) {
+    switch (command) {
+      case 'Edit':
+        if (!this.state.isEditing) {
+          this.setState({
+            addonClass: 'HideToolbar',
+            isEditing: true
+          });
+        }
+        break;
+
+      default:
+        break;
+    }
   }
 
   /** Render the component. */
