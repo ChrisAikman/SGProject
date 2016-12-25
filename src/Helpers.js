@@ -76,3 +76,9 @@ export function updateDatabase(threaddb) {
 
   return {discussion: discussionRef, comments: comments};
 }
+
+/** Universal function to handle scrolling a React node into view.
+ *  @param {object} node - The react node to scroll into view.
+ */
+export function scrollIntoView(node) {
+}

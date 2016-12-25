@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import update from 'react-addons-update';
 import { getCommentID } from './Helpers.js';
 import { updateDatabase } from './Helpers.js';
 import Comment from './Comment.js';
@@ -6,6 +7,7 @@ import './App.less';
 import 'font-awesome-webpack';
 import threaddb from '../data/Data.json';
 
+/** The entry class for the discussion app. */
 class App extends Component {
   /** Create the state and convert the database. */
   constructor() {
@@ -66,6 +68,36 @@ class App extends Component {
    *  @param {string} newcomment - The comment text of the new comment.
    */
   handleCommentReply(parentcomment, newcomment) {
+    var key = getCommentID(parentcomment);
+    var date = (new Date()).toISOString();
+
+    /* Create the new comment object. */
+    var newcommentdb = {
+      author: this.props.author,
+      author_id: this.props.author_id,
+      datetime: date,
+      comment: newcomment,
+      public: true,
+      deleted: false,
+      wasreply: true,
+      comments: []
+    }
+
+    var newkey = getCommentID(newcommentdb);
+
+    /* We need to let React know, so update the data. */
+    const newcomments = update(this.state.comments, {
+      [key]: {
+        comments: {$push: [newkey]},
+      },
+      $merge:{
+        [newkey]: newcommentdb
+      }
+    });
+
+    this.setState({
+      comments: newcomments
+    });
   }
 
   /** Handles editing a comment.
@@ -73,12 +105,41 @@ class App extends Component {
    *  @param {string} newcomment - The comment text of the new comment.
    */
   handleCommentEdit(comment, newcomment) {
+    var key = getCommentID(comment);
+
+    /* We simply need to let React know that the data has updated. */
+    if (key in this.state.comments) {
+      const newcomments = update(this.state.comments, {
+        [key]: {
+          comment: {$set: newcomment},
+        }
+      });
+
+      this.setState({
+        comments: newcomments
+      });
+    }
   }
 
   /** Handles deleting a comment.
    *  @param {object} comment - The comment that is being deleted.
    */
   handleCommentDelete(comment) {
+    var key = getCommentID(comment);
+
+    /* We simple need to let React know that the comment has been deleted. */
+    if ((key) in this.state.comments) {
+      const newcomments = update(this.state.comments, {
+        [key]: {
+          comment: {$set: ''},
+          deleted: {$set: true}
+        }
+      });
+
+      this.setState({
+        comments: newcomments
+      });
+    }
   }
 
   /** Render the component. */
