@@ -25,7 +25,7 @@ Install all required modules with: `npm install --save-dev`.
 
 Run the development build with: `npm start`.
 
-Compile production build with: `npm run build`.
+Compile production build with: `npm run build`. It is set to build for my website at [here](http://www.chrisaikman.com/sgproj). Change the homepage in the `package.json` config file to host it elsewhere.
 
 Run the tests with `./node_modules/karma/bin/karma start ./config/karma.config.js`.
 
