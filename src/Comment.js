@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import CommentEditor from './CommentEditor.js';
 import CommentToolbutton from './CommentToolbutton.js';
 import DeleteCommentWindow from './DeleteCommentWindow.js'
+import { getCommentID } from './Helpers.js';
 import { getTimestamp } from './Helpers.js';
 import { scrollIntoView } from './Helpers.js'
 import profilepic from './user.svg';
@@ -49,6 +50,7 @@ class Comment extends Component {
     if (this.props.nest_level < 2) {
       mytoolbars.push(
         <CommentToolbutton
+          key={getCommentID(this.props.comment) + 'ReplyButton'}
           icon={'fa fa-reply'}
           command={'Reply'}
           onClick={(command) => this.handleClick(command)}
@@ -60,6 +62,7 @@ class Comment extends Component {
     if (this.props.curauthorid === this.props.comment.author_id) {
       mytoolbars.push(
         <CommentToolbutton
+          key={getCommentID(this.props.comment) + 'DeleteButton'}
           icon={'fa fa-trash-o'}
           command={'Delete'}
           onClick={(command) => this.handleClick(command)}
@@ -68,6 +71,7 @@ class Comment extends Component {
 
       mytoolbars.push(
         <CommentToolbutton
+          key={getCommentID(this.props.comment) + 'EditButton'}
           icon={'fa fa-pencil-square-o'}
           command={'Edit'}
           onClick={(command) => this.handleClick(command)}
@@ -87,9 +91,9 @@ class Comment extends Component {
     if (this.state.isReplying) {
       return (
         <CommentEditor
-          key={56744323} // REPLACE THIS <----------------------------------------------------------------------
+          key={getCommentID(this.props.comment) + 'Reply'}
           comment={''}
-          ref={(CommentEditor) => {this.replyEditor = CommentEditor}} // DO NEED??? <-----------------------
+          ref={(CommentEditor) => {this.replyEditor = CommentEditor}}
           onClick={(command) => {this.handleClick(command)}}
         />
       );
@@ -204,9 +208,9 @@ class Comment extends Component {
     } else {
       return (
         <CommentEditor
-          key={567423} // REPLACE THIS <----------------------------------------------------------------------
+          key={getCommentID(this.props.comment) + 'Edit'}
           comment={commentText}
-          ref={(CommentEditor) => {this.commentEditor = CommentEditor}} // DO NEED??? <-----------------------
+          ref={(CommentEditor) => {this.commentEditor = CommentEditor}}
           onClick={(command) => {this.handleClick(command)}}
         />
       );
@@ -218,7 +222,7 @@ class Comment extends Component {
     if (this.state.isDeleting) {
       return (
         <DeleteCommentWindow
-          key={23978453} // REPLACE THIS <--------------------------------------------------------------------
+          key={getCommentID(this.props.comment) + 'Delete'}
           isDeleting={this.state.isDeleting}
           onClick={(command) => this.handleClick(command)}
         />

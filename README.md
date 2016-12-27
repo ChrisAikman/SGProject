@@ -69,6 +69,9 @@ Since the database was not in the most optimal format for React data updating, I
 ### Comment Nest Limit of Two
 To prevent the comments from being nested infinitely I assumed that this type of discussion has two nesting levels: the first contains replies to the original discussion, the second contains replies to those replies. It is assumed that each initial comment has its own discussion going on in a chronological order. This nest limit level can be easily changed as each comment keeps track of the level it is on.
 
+### Discussion Topic can be Edited/Deleted
+I assumed that the discussion topic could be edited and deleted like any other comment, given that the current user posted the topic.
+
 ### We Are Brady
 Since one of the requirements was to assume that we are one of the users with at least two comments, and since Brady has the most comments, I assumed that we are the user Brady.
 
@@ -166,3 +169,5 @@ This is just one discussion thread. It could use a parent layer that displays al
 
 ## What I've Learned
 I learned so much during this project! The biggest thing is that I learned (or relearned) how to use all of the tools and modules that I utilized in this project. I relearned how to setup and build a React app, and learned some new conventions for it. I learned how to configure Webpack and used common modules within it, such as the React Updates module, and the Less CSS Preprocessor module. I also finally learned how to do JavaScript testing!
+
+Although I learned so much, the biggest thing to me is to ***keep learning***. I have no doubts that are much more elegant and optimal ways to do everything I've done within this project. I hope to redo this project several months down the road to see how much I have improved. I look forward to any critiques or feedback so that I can keep improving my knowledge and optimizing my workflow.
