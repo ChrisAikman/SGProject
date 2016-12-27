@@ -42,19 +42,29 @@ class Comment extends Component {
     }
   }
 
+  /** Since the reply button can be in two places, resuse the code! */
+  getReplyButton() {
+    return (
+      <CommentToolbutton
+        key={getCommentID(this.props.comment) + 'ReplyButton'}
+        icon={'fa fa-reply'}
+        command={'Reply'}
+        onClick={(command) => this.handleClick(command)}
+      />
+    );
+  }
+
   /** Helper function to get a toolbar for comment management. */
   getToolbar() {
     var mytoolbars = [];
 
     /* We only want a maximum of two levels of comments. */
-    if (this.props.nest_level < 2) {
+    /* Ensure the right requirements are met for this reply button! */
+    if (this.props.nest_level < 3 &&
+       (this.props.comment.comments.length === 0 ||
+        this.props.nest_level === 1)) {
       mytoolbars.push(
-        <CommentToolbutton
-          key={getCommentID(this.props.comment) + 'ReplyButton'}
-          icon={'fa fa-reply'}
-          command={'Reply'}
-          onClick={(command) => this.handleClick(command)}
-        />
+        this.getReplyButton()
       );
     }
 
@@ -97,6 +107,15 @@ class Comment extends Component {
           onClick={(command) => {this.handleClick(command)}}
         />
       );
+    } else {
+      /* We only want a maximum of two levels of comments. */
+      if (this.props.nest_level < 3) {
+        return (
+          <div className="Toolbar">
+            {this.getReplyButton()}
+          </div>
+        );
+      }
     }
   }
 
@@ -107,8 +126,8 @@ class Comment extends Component {
     if (subComments.length > 0 || this.state.isReplying) {
       return (
         <div className="SubComments">
-          {this.getReplyEditor()}
           {subComments}
+          {this.getReplyEditor()}
         </div>
       );
     }

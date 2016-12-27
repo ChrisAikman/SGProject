@@ -151,7 +151,7 @@ class App extends Component {
           <h1>{this.state.discussion.title}</h1>
         </div>
         {this.getComment(this.state.comments[this.state.discussion.commentid], [], 1)}
-        {this.getComments(this.state.comments[this.state.discussion.commentid].comments, 1)}
+        {this.getComments(this.state.comments[this.state.discussion.commentid].comments, 2)}
       </div>
     );
   }
