@@ -249,8 +249,8 @@ class Comment extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionName="FadeInOut"
-        transitionEnterTimeout={3500}
-        transitionLeaveTimeout={3500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
       >
         <div className={classes + this.state.addonClass}>
           <div className="Side">

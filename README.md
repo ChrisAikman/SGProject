@@ -66,6 +66,9 @@ Minor fixes to polish everything for submission.
 ### Custom Database Parsing is OK
 Since the database was not in the most optimal format for React data updating, I chose to parse the data into a different format for easier control. More information on this can be seen in the [Data Format](#data-format) section.
 
+### Comment Nest Limit of Two
+To prevent the comments from being nested infinitely I assumed that this type of discussion has two nesting levels: the first contains replies to the original discussion, the second contains replies to those replies. It is assumed that each initial comment has its own discussion going on in a chronological order. This nest limit level can be easily changed as each comment keeps track of the level it is on.
+
 ### We Are Brady
 Since one of the requirements was to assume that we are one of the users with at least two comments, and since Brady has the most comments, I assumed that we are the user Brady.
 
@@ -89,7 +92,7 @@ Since this was a solo project, I did not use any of the more advanced git/GitHub
 
 ## Requirements Overview
 ### Implement the code and markup to display the thread on a web page.
-All of the code was implemented_____
+All of the code was implemented in a way that I felt was most appropriate. Although I am sure that there are much better ways to implement everything, and I can't wait to hear how to better program within React, I tried to make my code as nice as possible. I split code into different files when I could, and I made sure to document everything. I also named components, classes, functions, and variables with logical names for easier understanding. My hope is that several months to several years from now, I will be able to come back to this and understand exactly what I was thinking while programming this.
 
 ### Assume, as a visitor to the page you are the author of at least two of the comments.
 See the [We Are Brady](#we-are-brady) section in the Assumptions.
@@ -146,6 +149,20 @@ I spent some time researching the best WYSIWYG editor to ensure optimal user fri
 ## Tests
 For testing, I utilized Karma and Mocha. I aimed to get as much coverage as possible for the app. I put all of the tests in the `__tests__/setup-test.js` file. The tests automatically check whether the database has been converted correctly (see [Data Format](#data-format)), that the discussion topic has been rendered correctly, and that all of the comments are displayed. In addition, the edit, delete, and reply functionality is tested through `ReactTestUtils.Simulate()` to simulate user input. Although the coverage is not 100%, the coverage is broad. The untested areas of the app are relatively simple and tests for those could be written in the same way that the others were.
 
+## Documentation
+I used the JSDoc style to document all of the code. I also included comments within the code where necessary.
+
 ## Future Improvements
+Here are a few possible things that I would research for improving the app in the future.
+
+### Move Constants into a Config File
+I am not sure what the conventions are for React in this context. My assumptions are that it would be beneficial to pull out all constants into a config file to allow for easy changing of common data, or to even change the entire language of the app. I did something similar for the Quill config, as that has its own configuration file located at `config/quill.config.js`, but I would like to research the optimal way to handle this for common data within React.
+
+### Implement Additional Discussion Functionality
+It would be neat to implement additional functionality such as upvoting comments, and sorting comments based on date, or upvotes.
+
+### Implement the Surrounding Project
+This is just one discussion thread. It could use a parent layer that displays all of the discussion threads within a topic, and a parent layer above that that displays all of the topics on the site. In addition, it would be beneficial to include additional information, such as related discussions, within each discussion to allow for a more immersive experience for the user.
 
 ## What I've Learned
+I learned so much during this project! The biggest thing is that I learned (or relearned) how to use all of the tools and modules that I utilized in this project. I relearned how to setup and build a React app, and learned some new conventions for it. I learned how to configure Webpack and used common modules within it, such as the React Updates module, and the Less CSS Preprocessor module. I also finally learned how to do JavaScript testing!
