@@ -92,6 +92,7 @@ class Comment extends Component {
     return (
       <div className="Toolbar">
         {mytoolbars}
+        <div className="clear"></div>
       </div>
     )
   }
@@ -113,6 +114,7 @@ class Comment extends Component {
         return (
           <div className="Toolbar">
             {this.getReplyButton()}
+            <div className="clear"></div>
           </div>
         );
       }
@@ -259,6 +261,11 @@ class Comment extends Component {
     if ('deleted' in comment && comment.deleted) {
       return (
         <div className={classes}>
+        <div className="Side Desktop">
+          <div className="Filler">
+            &nbsp;
+          </div>
+        </div>
           <div className="Content">
             <div className="Deleted">
               This comment has been deleted.
