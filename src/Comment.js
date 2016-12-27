@@ -257,11 +257,15 @@ class Comment extends Component {
         transitionLeaveTimeout={500}
       >
         <div className={classes + this.state.addonClass}>
-          <div className="Side">
+          <div className="Side Desktop">
             <img src={profilepic} alt={comment.author}/>
           </div>
 
           <div className="Content">
+            <div className="Side Mobile">
+              <img src={profilepic} alt={comment.author}/>
+            </div>
+
             <div className="User">
               {comment.author}
             </div>

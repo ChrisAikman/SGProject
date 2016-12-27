@@ -1,6 +1,8 @@
 # Discussion Thread Application
 This is my version of the discussion thread application.
 
+Although I implemented this project in the way I thought best, I am certain there are better ways to go about implemented much of the functionality. I look forward to hearing ways to improve and optimize this app.
+
 Deployed build [here](http://www.chrisaikman.com/sgproj).
 
 ## Table of Contents
@@ -60,7 +62,7 @@ Implemented a good portion of the functionality.
 After my family had to leave, I put in several hours to finalize most of the code.
 
 ### Tuesday, December 27, 2016
-Minor fixes to polish everything for submission.
+Minor fixes to polish everything for submission. Wrote a majority of the README.
 
 ## Assumptions
 ### Custom Database Parsing is OK
@@ -77,6 +79,9 @@ Since one of the requirements was to assume that we are one of the users with at
 
 ### Data Loading
 I assumed that the database would actually be loaded by different means, such as dynamically using AJAX. Since this project was just for the front end, the dataset is hard loaded.
+
+### Server Communication
+I assumed that in a real deployment of this app, it would be communicating back and forth with the server. It is possible to do realtime updating of comments by pulling in the database, reparsing it, and then updating the database within React. In addition, when a user edits, deletes, or replies to a comment, a request should be made to the server to perform that operation within its database. These requests should be done within the `handleEdit()`, `handleReply()`, `handleDelete()` functions within `app.js`. In addition, the server should check that the requests are valid.
 
 ### Current User Info
 I assumed that the current user information (such as current author and author_id) would be available through the index. This information is passed as properties to the App. This setup can easily be changed if this convention is abnormal.
@@ -130,6 +135,7 @@ Upon initial viewing of the thread data, and reading on React data updating conv
 This new format was decided from the beginning as React convention states that, "*When you want to aggregate data from multiple children or to have two child components communicate with each other, move the state upwards so that it lives in the parent component. The parent can then pass the state back down to the children via props, so that the child components are always in sync with each other and with the parent.*" So instead of splitting the data down to the comment components, it was maintained in the main App. This is not necessary and could be changed back to the original format with a few modifications to the code, but there would need to be additional functions to search the recursive database.
 
 ## Design
+For the design, I tried to keep everything as minimalistic as possible. I tried to make sure that every part of the app had a purpose and that structure was heavily implied. I focused on a gray color scheme with a blue primary highlight color. I included room for a profile picture since, if I recall correctly from Visualization class, a picture can be processed and recognized within the brain faster than making the connection between a username and the person. I used enclosure to show which comments are subcomments. I used colors to emphasize certain features, such as coloring a comment that is going to be deleted red, and a new comment green. I used icons within the buttons for fast function recognition, and made the buttons stand out just enough to show that they provide functionality. I sized the comments based on the assumption that this app would likely have additional information or features on the side of the page. Finally, I utilized media queries to ensure that the app would respond to the sizes of different devices. Since I don't have access to a device testing suite, I tested the design on my computer, tablet and phone to ensure consistent use and easy access on varying sizes.
 
 ## Tools Used
 I tried to use third-party modules as much as I could instead of writing everything by myself. With this goal in mind, I researched and utilized several different tools.
@@ -168,6 +174,6 @@ It would be neat to implement additional functionality such as upvoting comments
 This is just one discussion thread. It could use a parent layer that displays all of the discussion threads within a topic, and a parent layer above that that displays all of the topics on the site. In addition, it would be beneficial to include additional information, such as related discussions, within each discussion to allow for a more immersive experience for the user.
 
 ## What I've Learned
-I learned so much during this project! The biggest thing is that I learned (or relearned) how to use all of the tools and modules that I utilized in this project. I relearned how to setup and build a React app, and learned some new conventions for it. I learned how to configure Webpack and used common modules within it, such as the React Updates module, and the Less CSS Preprocessor module. I also finally learned how to do JavaScript testing!
+I learned so much during this project! The biggest thing is that I learned (or relearned) how to use all of the tools and modules that I utilized in this project. I relearned how to setup and build a React app, and learned some new conventions for it. I learned how to configure Webpack and use common modules within it, such as the React Updates module, and the Less CSS Preprocessor module. I also finally learned how to do JavaScript testing!
 
 Although I learned so much, the biggest thing to me is to ***keep learning***. I have no doubts that are much more elegant and optimal ways to do everything I've done within this project. I hope to redo this project several months down the road to see how much I have improved. I look forward to any critiques or feedback so that I can keep improving my knowledge and optimizing my workflow.

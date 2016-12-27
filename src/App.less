@@ -95,6 +95,10 @@ body {
 
       .SubComments {
         margin-top: @spacing;
+
+        .CommentEditor .Button {
+          margin-bottom: @spacing;
+        }
       }
 
       .Toolbar {
@@ -104,6 +108,10 @@ body {
 
       .ql-editor {
         font: @fonts;
+      }
+
+      .ql-container .ql-editor {
+        background-color: @color-comment * 1.05;
       }
     }
 
@@ -189,6 +197,10 @@ body {
   }
 }
 
+.Mobile {
+  display: none;
+}
+
 .FadeInOut-appear {
   opacity: 0.01;
 }
@@ -221,12 +233,12 @@ body {
     .Comment {
       display: block;
 
-      .Side {
-        float: none;
-      }
-
       .Content {
         float: none;
+
+        .Side img {
+          margin-bottom: @spacing;
+        }
 
         .User, .Datetime {
           float: none;
@@ -239,5 +251,13 @@ body {
     .Warning {
       width: 100%;
     }
+  }
+
+  .Desktop {
+    display: none;
+  }
+
+  .Mobile {
+    display: block;
   }
 }
