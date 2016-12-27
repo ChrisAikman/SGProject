@@ -107,10 +107,12 @@ module.exports = {
       // we need to add the supported extension to this loader too.
       // Add one new line in `exclude` for each loader.
       //
-      // "file" loader makes sure those assets end up in the `build` folder.
-      // When you `import` an asset, you get its filename.
-      // "url" loader works just like "file" loader but it also embeds
-      // assets smaller than specified size as data URLs to avoid requests.
+      // "file" loader makes sure those assets get served by WebpackDevServer.
+      // When you `import` an asset, you get its (virtual) filename.
+      // In production, they would get copied to the `build` folder.
+      // "url" loader works like "file" loader except that it embeds assets
+      // smaller than specified limit in bytes as data URLs to avoid requests.
+      // A missing `test` is equivalent to a match.
       {
         exclude: [
           /\.html$/,
@@ -118,7 +120,9 @@ module.exports = {
           /\.css$/,
           /\.less$/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         ],
         loader: 'url',
         query: {
@@ -131,28 +135,26 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
+        query: {
 
+          // This is a feature of `babel-loader` for webpack (not Babel itself).
+          // It enables caching results in ./node_modules/.cache/babel-loader/
+          // directory for faster rebuilds.
+          cacheDirectory: true
+        }
       },
       {
         test: /\.less$/,
         loader: "style!css!less"
       },
-      // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "style" loader normally turns CSS into JS modules injecting <style>,
-      // but unlike in development configuration, we do something different.
-      // `ExtractTextPlugin` first applies the "postcss" and "css" loaders
-      // (second argument), then grabs the result CSS and puts it into a
-      // separate file in our build process. This way we actually ship
-      // a single CSS file in production instead of JS code injecting <style>
-      // tags. If you use code splitting, however, any async bundles will still
-      // use the "style" loader inside the async code so CSS from them won't be
-      // in the main CSS file.
+      // "style" loader turns CSS into JS modules that inject <style> tags.
+      // In production, we use a plugin to extract that CSS to a file, but
+      // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
-        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+        loader: 'style!css?importLoaders=1!postcss'
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
@@ -160,14 +162,20 @@ module.exports = {
         test: /\.json$/,
         loader: 'json'
       },
-      // "file" loader for svg
       {
-        test: /\.svg$/,
-        loader: 'file',
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&minetype=application/font-woff",
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file",
+        query: {
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },
     ]
   },
 

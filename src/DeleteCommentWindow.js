@@ -30,4 +30,10 @@ class DeleteCommentWindow extends Component {
   }
 }
 
+/** PropType definitions to ensure correct properties. */
+DeleteCommentWindow.propTypes = {
+  isDeleting: React.PropTypes.bool.isRequired,
+  onClick: React.PropTypes.func.isRequired,
+}
+
 export default DeleteCommentWindow;

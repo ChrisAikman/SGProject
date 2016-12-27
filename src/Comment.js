@@ -112,47 +112,6 @@ class Comment extends Component {
     return null;
   }
 
-  /** Helper function to get the normal comment text, or the editor. */
-  getCommentText() {
-    const comment = this.props.comment;
-    const commentText = comment.comment;
-
-    if (!this.state.isEditing) {
-      return (
-        <div className="CommentText ql-snow">
-          <div
-            className="ql-editor"
-            dangerouslySetInnerHTML={{__html: commentText}}
-          />
-        </div>
-      );
-    } else {
-      return (
-        <CommentEditor
-          key={567423} // REPLACE THIS <----------------------------------------------------------------------
-          comment={commentText}
-          ref={(CommentEditor) => {this.commentEditor = CommentEditor}} // DO NEED??? <-----------------------
-          onClick={(command) => {this.handleClick(command)}}
-        />
-      );
-    }
-  }
-
-  /** Helper function to get a delete window if the comment is being deleted. */
-  getDeleteWindow() {
-    if (this.state.isDeleting) {
-      return (
-        <DeleteCommentWindow
-          key={23978453} // REPLACE THIS <--------------------------------------------------------------------
-          isDeleting={this.state.isDeleting}
-          onClick={(command) => this.handleClick(command)}
-        />
-      );
-    }
-
-    return null;
-  }
-
   /** Handles button commands for this comment.
    *  @param {string} command - The command to execute.
    */
@@ -228,6 +187,47 @@ class Comment extends Component {
     }
   }
 
+  /** Helper function to get the normal comment text, or the editor. */
+  getCommentText() {
+    const comment = this.props.comment;
+    const commentText = comment.comment;
+
+    if (!this.state.isEditing) {
+      return (
+        <div className="CommentText ql-snow">
+          <div
+            className="ql-editor"
+            dangerouslySetInnerHTML={{__html: commentText}}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <CommentEditor
+          key={567423} // REPLACE THIS <----------------------------------------------------------------------
+          comment={commentText}
+          ref={(CommentEditor) => {this.commentEditor = CommentEditor}} // DO NEED??? <-----------------------
+          onClick={(command) => {this.handleClick(command)}}
+        />
+      );
+    }
+  }
+
+  /** Helper function to get a delete window if the comment is being deleted. */
+  getDeleteWindow() {
+    if (this.state.isDeleting) {
+      return (
+        <DeleteCommentWindow
+          key={23978453} // REPLACE THIS <--------------------------------------------------------------------
+          isDeleting={this.state.isDeleting}
+          onClick={(command) => this.handleClick(command)}
+        />
+      );
+    }
+
+    return null;
+  }
+
   /** Render the component. */
   render() {
     const comment = this.props.comment;
@@ -281,5 +281,16 @@ class Comment extends Component {
     );
   }
 }
+
+/** PropType definitions to ensure correct properties. */
+Comment.propTypes = {
+  comment: React.PropTypes.object.isRequired,
+  nest_level: React.PropTypes.number.isRequired,
+  subcomments: React.PropTypes.array,
+  curauthorid: React.PropTypes.number,
+  onEdit: React.PropTypes.func.isRequired,
+  onReply: React.PropTypes.func.isRequired,
+  onDelete: React.PropTypes.func.isRequired,
+};
 
 export default Comment;

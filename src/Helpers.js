@@ -1,3 +1,5 @@
+import ReactDOM from 'react-dom';
+
 /** Universal function for managing timestamps.
  *  @param {string} timestamp - The timestamp in ISO 8601.
  */
@@ -81,4 +83,17 @@ export function updateDatabase(threaddb) {
  *  @param {object} node - The react node to scroll into view.
  */
 export function scrollIntoView(node) {
+  /* Utilize the scroll-into-view module to perform the scrolling. */
+  var scrollIntoView = require('scroll-into-view');
+  const dom_node = ReactDOM.findDOMNode(node);
+  scrollIntoView(dom_node, {
+    time: 500,
+    ease: function(value){
+        return (Math.pow(value,2) - value);
+    },
+    align:{
+        top: .5,
+        left: .5
+    }
+  });
 }

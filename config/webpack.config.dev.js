@@ -112,7 +112,9 @@ module.exports = {
           /\.css$/,
           /\.less$/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         ],
         loader: 'url',
         query: {
@@ -152,14 +154,20 @@ module.exports = {
         test: /\.json$/,
         loader: 'json'
       },
-      // "file" loader for svg
       {
-        test: /\.svg$/,
-        loader: 'file',
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&minetype=application/font-woff",
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file",
+        query: {
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },
     ]
   },
 

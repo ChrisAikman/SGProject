@@ -38,39 +38,33 @@ module.exports = function(config) {
       devtool: 'inline-source-map', //just do inline source maps instead of the default
       module: {
         loaders: [
-          // Process JS with Babel.
+          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
           {
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
+            test: /\.css$/,
+            loader: 'style!css?importLoaders=1!postcss'
           },
           {
             test: /\.less$/,
             loader: "style!css!less"
           },
-          // "postcss" loader applies autoprefixer to our CSS.
-          // "css" loader resolves paths in CSS and adds assets as dependencies.
-          // "style" loader turns CSS into JS modules that inject <style> tags.
-          // In production, we use a plugin to extract that CSS to a file, but
-          // in development "style" loader enables hot editing of CSS.
-          {
-            test: /\.css$/,
-            loader: 'style!css?importLoaders=1!postcss'
-          },
-          // JSON is not enabled by default in Webpack but both Node and Browserify
-          // allow it implicitly so we also enable it.
           {
             test: /\.json$/,
             loader: 'json'
           },
-          // "file" loader for svg
           {
-            test: /\.svg$/,
-            loader: 'file',
+            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: "url-loader?limit=10000&minetype=application/font-woff",
             query: {
               name: 'static/media/[name].[hash:8].[ext]'
             }
-          }
+          },
+          {
+            test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: "file",
+            query: {
+              name: 'static/media/[name].[hash:8].[ext]'
+            }
+          },
         ]
       }
     },

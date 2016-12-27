@@ -157,4 +157,10 @@ class App extends Component {
   }
 }
 
+/** PropType definitions to ensure correct properties. */
+App.propTypes = {
+  author: React.PropTypes.string,
+  author_id: React.PropTypes.number,
+};
+
 export default App;

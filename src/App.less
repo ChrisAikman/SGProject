@@ -4,7 +4,15 @@
 @color-background: #8d9799;
 @color-comment: #eee;
 @color-primary: #6a9faa;
+@color-secondary: #;
 @color-text: #222;
+
+.round-border(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+          border-radius: @radius;
+}
 
 .shadow(@spread, @blur, @color) {
   -webkit-box-shadow: 0px 0px @spread @blur @color;
@@ -79,14 +87,41 @@ body {
         font-style: italic;
       }
 
+      .CommentText {
+        .ql-editor {
+          padding: 0;
+        }
+      }
+
       .SubComments {
         margin-top: @spacing;
       }
+
+      .Toolbar {
+        width: 100%;
+        margin-top: @spacing;
+      }
+
+      .ql-editor {
+        font: @fonts;
+      }
+    }
+
+    .Deleted {
+      color: @color-text * 2.5;
+      font-size: 80%;
+      font-style: italic;
     }
   }
 
   .OuterComment {
     border: 1px solid @color-comment * .6;
+  }
+
+  .CommentEditor {
+    .Button {
+      margin-top: @spacing / 2;
+    }
   }
 
   .HideToolbar {
@@ -95,6 +130,14 @@ body {
         display: none;
       }
     }
+  }
+
+  .NewComment {
+    background-color: #cec;
+  }
+
+  .DeleteComment {
+    background-color: #ecc;
   }
 }
 
@@ -115,5 +158,86 @@ body {
 
   &:hover {
     background-color: @color-background;
+  }
+}
+
+.DeleteCommentWarning {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.25);
+
+  .Warning {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    text-align: center;
+    width: 700px;
+    margin: 0 auto;
+    padding: @spacing;
+    border: 1px solid black;
+    box-sizing: border-box;
+    .shadow(20px, 10px, rgba(0,0,0,.25));
+
+    .Buttons {
+      margin: 0 auto;
+    }
+  }
+}
+
+.FadeInOut-appear {
+  opacity: 0.01;
+}
+
+.FadeInOut-appear.FadeInOut-appear-active {
+  opacity: 1;
+  transition: opacity 500ms ease;
+}
+
+.FadeInOut-enter {
+  opacity: 0.01;
+}
+
+.FadeInOut-enter.FadeInOut-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease;
+}
+
+.FadeInOut-leave {
+  opacity: 1;
+}
+
+.FadeInOut-leave.FadeInOut-leave-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease;
+}
+
+@media only screen and (max-width: 500px) {
+  .Thread {
+    .Comment {
+      display: block;
+
+      .Side {
+        float: none;
+      }
+
+      .Content {
+        float: none;
+
+        .User, .Datetime {
+          float: none;
+        }
+      }
+    }
+  }
+
+  .DeleteCommentWarning {
+    .Warning {
+      width: 100%;
+    }
   }
 }

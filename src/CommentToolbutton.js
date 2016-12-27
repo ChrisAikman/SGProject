@@ -14,4 +14,11 @@ class CommentToolbutton extends Component {
   }
 }
 
+/** PropType definitions to ensure correct properties. */
+CommentToolbutton.propTypes = {
+  icon: React.PropTypes.string.isRequired,
+  command: React.PropTypes.string.isRequired,
+  onClick: React.PropTypes.func.isRequired,
+};
+
 export default CommentToolbutton;
